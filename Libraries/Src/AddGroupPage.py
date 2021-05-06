@@ -4,8 +4,8 @@ from ExpectedLinks import links, expected_add_group_page_url
 from ExpectedAttributeValues import eav
 from Locators import locator
 from robot.api import logger
-from Browser import ElementState, AssertionOperator
-import time
+from Browser import ElementState, AssertionOperator, KeyboardModifier, MouseButton
+from ControlOption import ControlOption
 
 class AddGroupPage:
     """
@@ -164,12 +164,15 @@ class AddGroupPage:
         logger.info(filtered_permissions)
 
         # then select each and every element in filtered_permission_elements by pressing CTRL key and clicking on them
-        self._loader.bl.press_keys( locator['add_group_page']['generic_filtered_permission'], 'Control' )
+        control_option = ControlOption()
+        setattr(control_option, 'name', 'Control')
+        for element in filtered_permission_elements:
+            self._loader.bl.click( element, MouseButton.left, 1, None, None, None, False, False, control_option )
 
         # Then it clicks on choose_all_permissions_option
-        self._loader.bl.click(selector=locator['add_group_page']['choose_all_permissions_option'])
+        self._loader.bl.click( locator['add_group_page']['choose_all_permissions_option'], MouseButton.left)
         # It then verifies that the permissions are added inside chosen_permissions_dropdown.
-        self._verify_permissions_added(filtered_permissions)
+        # self._verify_permissions_added(filtered_permissions)
 
     def _verify_permissions_added(self, filtered_permissions):  # use set operations like set1.contains(set2)
         """

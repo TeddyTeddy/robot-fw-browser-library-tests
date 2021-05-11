@@ -1,0 +1,13 @@
+#!/bin/bash
+# How to append to sys.path by setting PYTHONPATH in shell?
+# https://www.devdungeon.com/content/python-import-syspath-and-pythonpath-tutorial
+# Note that if you have multiple paths in PYTHONPATH, they are seperated by ':' character
+python setup_pythonpath.py      # creates pythonpath.txt
+PYTHONPATH="$(grep -v '*' pythonpath.txt)"
+export PYTHONPATH
+coverage run --branch AdminLoginPageUT/AdminLoginPageUT.py
+coverage run --branch -a AdminMainPageUT/AdminMainPageUT.py
+coverage run --branch -a AddGroupPageUT/AddGroupPageUT.py
+coverage run --branch -a ConfirmGroupsDeletionsPageUT/ConfirmGroupsDeletionsPageUT.py
+coverage run --branch -a GroupsPageUT/GroupsPageUT.py
+coverage html

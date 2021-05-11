@@ -6,6 +6,7 @@ from Locators import locator
 from robot.api import logger
 from Browser import ElementState, AssertionOperator, MouseButton
 from ControlOption import ControlOption
+import re
 
 class AddGroupPage:
     """
@@ -136,8 +137,24 @@ class AddGroupPage:
         self._loader.bl.fill_text(selector=locator['add_group_page']['input_name_field'], txt=group_name)
 
     def enter_search_term_in_available_permissions_filter(self, permission_search_term):
-        self._loader.bl.fill_text(selector=locator['add_group_page']['input_permission_field'],
-                                   txt=permission_search_term)
+        # self._loader.bl.fill_text(selector=locator['add_group_page']['input_permission_field'],
+        #                           txt=permission_search_term)
+        input_permission_field = self._loader.bl.get_element(selector=locator['add_group_page']['input_permission_field'])
+        logger.info(permission_search_term)
+        fill_text_js_function = ( 'function fill_permission_field() {\n'
+                f'input_field = document.getElementById("id_permissions_input");\n'
+                'input_field.focus();'
+                f'permission_search_term = "{permission_search_term}"\n'
+                'var i;\n'
+                'for (i = 0; i < permission_search_term.length; i++) {\n'
+                'input_field.dispatchEvent(new KeyboardEvent("keypress", {"key":permission_search_term[i]}));\n'
+                'input_field.dispatchEvent(new KeyboardEvent("keydown",  {"key":permission_search_term[i]}));\n'
+                'input_field.dispatchEvent(new KeyboardEvent("keyup", {"key":permission_search_term[i]}));\n'
+                '}}\n'
+        )
+
+        self._loader.bl.execute_javascript(function=fill_text_js_function, selector=input_permission_field)
+
         # return True if there are permissions listed, otherwise return False
         return bool(self._loader.bl.get_text(selector=locator['add_group_page']['available_permissions_dropdown']))
 

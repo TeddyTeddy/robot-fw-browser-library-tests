@@ -116,6 +116,8 @@ class GroupsPage:
         self._loader.bl.click(selector=group_element_checkbox_locator)
 
     def select_delete_selected_groups_dropdown(self):
+        self._loader.bl.click(selector=locator['groups_page']['default_option'])
+        self._loader.bl.wait_for_elements_state(selector=locator['groups_page']['delete_selected_groups_option'], state=ElementState.visible)
         self._loader.bl.click(selector=locator['groups_page']['delete_selected_groups_option'])
 
     def press_go(self):

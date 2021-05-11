@@ -147,8 +147,8 @@ class AddGroupPage:
                 f'permission_search_term = "{permission_search_term}"\n'
                 'var i;\n'
                 'for (i = 0; i < permission_search_term.length; i++) {\n'
+                 'input_field.dispatchEvent(new KeyboardEvent("keydown",  {"key":permission_search_term[i]}));\n'
                 'input_field.dispatchEvent(new KeyboardEvent("keypress", {"key":permission_search_term[i]}));\n'
-                'input_field.dispatchEvent(new KeyboardEvent("keydown",  {"key":permission_search_term[i]}));\n'
                 'input_field.dispatchEvent(new KeyboardEvent("keyup", {"key":permission_search_term[i]}));\n'
                 '}}\n'
         )

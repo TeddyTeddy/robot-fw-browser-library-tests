@@ -4,7 +4,7 @@ from ExpectedLinks import links, expected_add_group_page_url
 from ExpectedAttributeValues import eav
 from Locators import locator
 from robot.api import logger
-from Browser import ElementState, AssertionOperator, KeyboardModifier, MouseButton
+from Browser import ElementState, AssertionOperator, MouseButton
 from ControlOption import ControlOption
 
 class AddGroupPage:
@@ -27,15 +27,14 @@ class AddGroupPage:
         # wait until the Logout Element is enabled on the page
         self._loader.bl.wait_for_elements_state(selector=locator['add_group_page']['title'], state=ElementState.visible)
 
-        """
-        # check the validity of the url on the admin_main_page page
+        # check the validity of the url on the add group page
         self._loader.bl.get_url(assertion_operator=AssertionOperator.equal, assertion_expected=expected_add_group_page_url)
 
         # at this point, the add_group_page is loaded
         self._verify_texts_on_add_group_page()
         self._verify_links_on_add_group_page()
         self._verify_the_buttons_on_add_group_page()
-        """
+
 
     def _verify_the_buttons_on_add_group_page(self):
         """
@@ -124,7 +123,7 @@ class AddGroupPage:
         :return: None
         """
         # wait until the Logout Element is visible on the page
-        assert self._loader.bl.get_element_state(selector=locator['add_group_page']['remove_all_permissions_option'], state=ElementState.visible)
+        self._loader.bl.get_element_state(selector=locator['add_group_page']['remove_all_permissions_option'], state=ElementState.visible)
 
         if self._loader.bl.get_text(selector=locator['add_group_page']['chosen_permissions_dropdown']):
             self._loader.bl.get_attribute(selector=locator['add_group_page']['remove_all_permissions_option'], attribute='class',
@@ -134,8 +133,7 @@ class AddGroupPage:
                 assertion_operator=AssertionOperator.equal, assertion_expected=eav['add_group_page']['remove_all_permissions_inactive'])
 
     def enter_name_for_new_group(self, group_name):
-        self._loader.bl.fill_text(selector=locator['add_group_page']['input_name_field'],
-                                   txt=group_name)
+        self._loader.bl.fill_text(selector=locator['add_group_page']['input_name_field'], txt=group_name)
 
     def enter_search_term_in_available_permissions_filter(self, permission_search_term):
         self._loader.bl.fill_text(selector=locator['add_group_page']['input_permission_field'],
@@ -172,7 +170,8 @@ class AddGroupPage:
         # Then it clicks on choose_all_permissions_option
         self._loader.bl.click( locator['add_group_page']['choose_all_permissions_option'], MouseButton.left)
         # It then verifies that the permissions are added inside chosen_permissions_dropdown.
-        # self._verify_permissions_added(filtered_permissions)
+        self._verify_permissions_added(filtered_permissions)
+
 
     def _verify_permissions_added(self, filtered_permissions):  # use set operations like set1.contains(set2)
         """
@@ -191,8 +190,8 @@ class AddGroupPage:
         logger.info(chosen_permissions)
         logger.info(filtered_permissions)
         # NOTE: sorted(chosen_permissions) == sorted(filtered_permissions) does not work.
-        # Why? because chosen_permissions is a larger set
-        assert chosen_permissions.issuperset(filtered_permissions)
+        # Why? because filtered_permissions is a larger set
+        assert filtered_permissions.issuperset(chosen_permissions)
 
     def clear_available_permissions_filter(self):
         self._loader.bl.clear_text(selector=locator['add_group_page']['input_permission_field'])

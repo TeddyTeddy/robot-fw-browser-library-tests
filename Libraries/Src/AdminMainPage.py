@@ -27,7 +27,8 @@ class AdminMainPage:
         """
         # at this stage, we expect a redirection to expected_admin_main_page_url
         # wait until the Logout Element is enabled on the page
-        assert self._loader.bl.get_element_state(selector=locator['admin_main_page']['logout'], state=ElementState.visible)
+        self._loader.bl.wait_for_elements_state(selector=locator['admin_main_page']['logout'], state=ElementState.visible)
+        # assert self._loader.bl.get_element_state(selector=locator['admin_main_page']['logout'], state=ElementState.visible)
         # check the validity of the url on the admin_main_page page
         self._loader.bl.get_url(assertion_operator=AssertionOperator.equal, assertion_expected=expected_admin_main_page_url)
 

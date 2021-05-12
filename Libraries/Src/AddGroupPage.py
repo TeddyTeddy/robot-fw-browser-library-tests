@@ -146,7 +146,7 @@ class AddGroupPage:
         # input_permission_field = self._loader.bl.get_element(selector=locator['add_group_page']['input_permission_field'])
         # logger.info(permission_search_term)
         # fill_text_js_function = ( 'function fill_permission_field() {\n'
-        #        f'input_field = document.getElementById("id_permissions_input");\n'
+        #        f'input_field = window.document.getElementById("id_permissions_input");\n'
         #        'input_field.focus();'
         #        f'permission_search_term = "{permission_search_term}"\n'
         #        'var i;\n'
@@ -154,7 +154,8 @@ class AddGroupPage:
         #         'input_field.dispatchEvent(new KeyboardEvent("keydown",  {"key":permission_search_term[i]}));\n'
         #        'input_field.dispatchEvent(new KeyboardEvent("keypress", {"key":permission_search_term[i]}));\n'
         #        'input_field.dispatchEvent(new KeyboardEvent("keyup", {"key":permission_search_term[i]}));\n'
-        #        '}}\n'
+        #       '}}\n'
+        #       'fill_permission_field();\n'
         #)
 
         # self._loader.bl.execute_javascript(function=fill_text_js_function, selector=input_permission_field)

@@ -7,7 +7,7 @@ from GroupsPage import GroupsPage     # class under test (CUT)
 from ExpectedLinks import links, expected_groups_page_url, base_link
 from ExpectedTexts import expected
 from ExpectedAttributeValues import eav
-from Browser import ElementState, AssertionOperator
+from Browser import ElementState, AssertionOperator, SelectAttribute
 
 class GroupsPageUT(unittest.TestCase):
     def setUp(self) -> None:  # before running an individual test case
@@ -175,8 +175,14 @@ class GroupsPageUT(unittest.TestCase):
     def test_select_delete_selected_groups_dropdown(self):
         # configure the mock browser library for select_delete_selected_groups_dropdown()'s calls
         expect(LibraryLoader.get_instance().bl).click(
-            selector=locator['groups_page']['delete_selected_groups_option']
+            selector=locator['groups_page']['default_option']
         ).thenReturn(None)
+
+        expect(LibraryLoader.get_instance().bl).select_options_by(
+                locator['groups_page']['delete_selected_groups_option_2'],
+                SelectAttribute.text,
+                expected['groups_page']['delete_selected_groups_option_text']).thenReturn(None)
+
         # CUT gets magically the mock instances (i.e. _loader & sl)
         groups_page = GroupsPage()
 

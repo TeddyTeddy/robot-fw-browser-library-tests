@@ -4,7 +4,7 @@ from ExpectedAttributeValues import eav
 from ExpectedLinks import links, expected_groups_page_url, base_link
 from Locators import locator
 from robot.api import logger
-from Browser import ElementState, AssertionOperator
+from Browser import ElementState, AssertionOperator, SelectAttribute
 import re
 
 
@@ -76,6 +76,7 @@ class GroupsPage:
         observed_y_groups = self._loader.bl.get_text(selector=locator['groups_page']['y_groups'])
         y = re.match(r'\d+', observed_y_groups).group(0)
         logger.info(f'Observed {y} groups')
+        logger.info(observed_x_of_y_selected)
         assert y in observed_x_of_y_selected
 
     def _verify_links_on_groups_page(self, group_name):
@@ -100,7 +101,8 @@ class GroupsPage:
         """
         added_group_locator = locator['groups_page']['generic_group_element'] % group_name
         group_link = self._loader.bl.get_attribute(selector=added_group_locator, attribute='href')
-        # group link e.g:   https://glacial-earth-31542.herokuapp.com/admin/auth/group/168/change/
+        logger.info(group_link)
+        # group link e.g:   /admin/auth/group/168/change/
         match = re.search(links['groups_page']['added_group_link'], group_link)
         assert bool(match)
 
@@ -117,8 +119,14 @@ class GroupsPage:
 
     def select_delete_selected_groups_dropdown(self):
         self._loader.bl.click(selector=locator['groups_page']['default_option'])
-        self._loader.bl.wait_for_elements_state(selector=locator['groups_page']['delete_selected_groups_option'], state=ElementState.visible)
-        self._loader.bl.click(selector=locator['groups_page']['delete_selected_groups_option'])
+        # NOTE: The following click does not work: https://github.com/MarketSquare/robotframework-browser/issues/987
+        # self._loader.bl.wait_for_elements_state(selector=locator['groups_page']['delete_selected_groups_option'], state=ElementState.visible)
+        # self._loader.bl.click(selector=locator['groups_page']['delete_selected_groups_option'])
+        # NOTE: Instead, we have the following workaround:
+        self._loader.bl.select_options_by(
+                locator['groups_page']['delete_selected_groups_option_2'],
+                SelectAttribute.text,
+                expected['groups_page']['delete_selected_groups_option_text'])
 
     def press_go(self):
         self._loader.bl.click(selector=locator['groups_page']['go_button'])

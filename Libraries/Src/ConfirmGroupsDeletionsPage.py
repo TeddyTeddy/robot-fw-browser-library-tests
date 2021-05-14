@@ -4,6 +4,7 @@ from ExpectedLinks import links, expected_groups_page_url, base_link
 from Locators import locator
 from Browser import ElementState, AssertionOperator
 import re
+from robot.api import logger
 
 class ConfirmGroupsDeletionsPage:
     """
@@ -67,15 +68,17 @@ class ConfirmGroupsDeletionsPage:
         # the group to be deleted shows as an item under locator['confirm_groups_deletions_page']['objects']
         group_locator = locator['confirm_groups_deletions_page']['generic_group_element'] % group_name
         group_link = self._loader.bl.get_attribute(selector=group_locator, attribute='href')
-        # group link e.g:   https://glacial-earth-31542.herokuapp.com/admin/auth/group/168/change/
+        logger.info(group_link)
+        # group link e.g:   /admin/auth/group/168/change/
         match = re.search(links['confirm_groups_deletions_page']['group_to_be_deleted_link'], group_link)
         assert bool(match)
 
         # cancel_deletion_button
         observed_cancel_deletion_button_link = self._loader.bl.get_attribute(
-            locator=locator['confirm_groups_deletions_page']['cancel_deletion_button'], attribute='href')
-        assert observed_cancel_deletion_button_link == \
-            links['confirm_groups_deletions_page']['cancel_deletion_button_link']
+            selector=locator['confirm_groups_deletions_page']['cancel_deletion_button'], attribute='href')
+        logger.info(observed_cancel_deletion_button_link)
+        logger.info(links['confirm_groups_deletions_page']['cancel_deletion_button_link'])
+        assert observed_cancel_deletion_button_link == links['confirm_groups_deletions_page']['cancel_deletion_button_link']
 
     def press_confirm_button(self):
         self._loader.bl.click(selector=locator['confirm_groups_deletions_page']['confirm_deletion_button'])

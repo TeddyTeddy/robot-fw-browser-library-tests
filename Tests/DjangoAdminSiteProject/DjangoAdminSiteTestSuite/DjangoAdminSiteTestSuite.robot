@@ -10,12 +10,12 @@ Logging In As Admin
 Creating "Blog Editors" Group
     Create "Blog Editors" Group
 
-# Creating "Group Editors" Group
-#    Create "Group Editors" Group
+Creating "Group Editors" Group
+    Create "Group Editors" Group
 
 Deleting "Blog Editors" Group
     Delete "Blog Editors" Group
 
-# Deleting "Group Editors" Group
-#  Delete "Group Editors" Group
+Deleting "Group Editors" Group
+    Delete "Group Editors" Group
 

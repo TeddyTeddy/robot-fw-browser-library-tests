@@ -139,7 +139,7 @@ class AddGroupPage:
     def enter_search_term_in_available_permissions_filter(self, permission_search_term):
         # IMPORTANT: There are 2 options here, only comment out one option at a time and run the test suite
         # *********************** OPTION #1 start **********************************************************
-        self._loader.bl.fill_text(selector=locator['add_group_page']['input_permission_field'],
+        self._loader.bl.type_text(selector=locator['add_group_page']['input_permission_field'],
                                   txt=permission_search_term)
         # *********************** OPTION #1 end ************************************************************
         # *********************** OPTION #2 start **********************************************************
@@ -214,7 +214,7 @@ class AddGroupPage:
         logger.info(filtered_permissions)
         # NOTE: sorted(chosen_permissions) == sorted(filtered_permissions) does not work.
         # Why? because filtered_permissions is a larger set
-        assert filtered_permissions.issuperset(chosen_permissions)
+        assert chosen_permissions.issuperset(filtered_permissions)
 
     def clear_available_permissions_filter(self):
         self._loader.bl.clear_text(selector=locator['add_group_page']['input_permission_field'])

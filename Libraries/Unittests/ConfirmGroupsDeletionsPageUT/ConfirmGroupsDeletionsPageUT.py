@@ -87,13 +87,14 @@ class ConfirmGroupsDeletionsPageUT(unittest.TestCase):
 
         # the group to be deleted shows as an item under locator['confirm_groups_deletions_page']['objects']
         # https://glacial-earth-31542.herokuapp.com/admin/auth/group/79/change/
-        url = f'{base_link}admin/auth/group/23/change/'
+        url = 'admin/auth/group/23/change/'
         group_locator = locator['confirm_groups_deletions_page']['generic_group_element'] % group_name
         expect(LibraryLoader.get_instance().bl).get_attribute(selector=group_locator, attribute='href').thenReturn(url)
 
         # cancel_deletion_button
         expect(LibraryLoader.get_instance().bl).get_attribute(
-            locator=locator['confirm_groups_deletions_page']['cancel_deletion_button'], attribute='href').thenReturn(links['confirm_groups_deletions_page']['cancel_deletion_button_link'])
+            selector=locator['confirm_groups_deletions_page']['cancel_deletion_button'],
+            attribute='href').thenReturn(links['confirm_groups_deletions_page']['cancel_deletion_button_link'])
 
         # CUT gets magically the mock instances (i.e. _loader & sl)
         confirm_group_deletions_page = ConfirmGroupsDeletionsPage()

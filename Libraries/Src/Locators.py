@@ -77,6 +77,7 @@ locator = {
         'action': '//*[@id="changelist-form"]/div[1]/label',
         'default_option':'//*[@id="changelist-form"]/div[1]/label/select',
         'delete_selected_groups_option': f'//*[@id="changelist-form"]/div[1]/label/select/option[contains(.,"{expected["groups_page"]["delete_selected_groups_option_text"]}")]',
+        'delete_selected_groups_option_2': '//select[@name="action"]',
         'go_button': '//*[@id="changelist-form"]/div[1]/button',
         'x_of_y_selected': '//*[@id="changelist-form"]/div[1]/span',
         'select_all_groups': '//*[@id="result_list"]/thead/tr/th[2]/div[1]/span',

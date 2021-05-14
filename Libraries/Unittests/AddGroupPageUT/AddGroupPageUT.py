@@ -202,7 +202,7 @@ class AddGroupPageUT(unittest.TestCase):
         self.do_test_enter_search_term_in_available_permissions_filter(permission_search_term='yielding no permissions')
 
     def do_test_enter_search_term_in_available_permissions_filter(self, permission_search_term):
-        expect(LibraryLoader.get_instance().bl).fill_text(
+        expect(LibraryLoader.get_instance().bl).type_text(
             selector=locator['add_group_page']['input_permission_field'],
             txt=permission_search_term).thenReturn(None)
 

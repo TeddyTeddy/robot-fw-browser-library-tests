@@ -5,17 +5,33 @@ Resource            Resources/DjangoAdminSiteTestSuite_resource.robot
 
 *** Test Cases ***
 Logging In As Admin
-    Login As Admin
+    Go to admin login page
+    Login    ${CREDENTIALS}[valid_admin][username]     ${CREDENTIALS}[valid_admin][password]    # opens admin_main_page
+    Verify admin main page      ${CREDENTIALS}[valid_admin][username]
 
 Creating "Blog Editors" Group
-    Create "Blog Editors" Group
+    Go To Admin Main Page
+    Click On Add Group Button   # opens add_group_page
+    Verify Add Group Page
+    Add Group With Permissions  group_name=${BLOG_EDITORS_GROUP_NAME}     permissions=${BLOG_EDITORS_PERMISSIONS}     # opens groups_page
 
 Creating "Group Editors" Group
-    Create "Group Editors" Group
+    Go To Admin Main Page
+    Click On Add Group Button   # opens add_group_page
+    Verify Add Group Page
+    Add Group With Permissions  group_name=${GROUP_EDITORS_GROUP_NAME}     permissions=${GROUP_EDITORS_PERMISSIONS}     # opens groups_page
 
 Deleting "Blog Editors" Group
-    Delete "Blog Editors" Group
+    Select Checkbox For Group  group_name=${BLOG_EDITORS_GROUP_NAME}
+    Select Delete Selected Groups Dropdown
+    Press Go    # opens confirm_groups_deletions_page
+    Verify Confirm Group Deletions Page     group_name=${BLOG_EDITORS_GROUP_NAME}
+    Press Confirm Button
 
 Deleting "Group Editors" Group
-    Delete "Group Editors" Group
+    Select Checkbox For Group  group_name=${GROUP_EDITORS_GROUP_NAME}
+    Select Delete Selected Groups Dropdown
+    Press Go    # opens confirm_groups_deletions_page
+    Verify Confirm Group Deletions Page     group_name=${GROUP_EDITORS_GROUP_NAME}
+    Press Confirm Button
 

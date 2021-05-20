@@ -1,23 +1,5 @@
 # -*- coding: utf-8 -*-
 expected = {
-    'admin_main_page': {
-        'main_title_text': 'Django administration',         # on the upper left corner
-        'dynamic_user_tab_text': 'WELCOME, %s. VIEW SITE / CHANGE PASSWORD / LOG OUT',
-        'welcome_text': 'WELCOME,',                         # on the upper right corner
-        'view_site_text': 'VIEW SITE',                      # on the upper right corner
-        'change_password_text': 'CHANGE PASSWORD',          # on the upper right corner
-        'logout_text': 'LOG OUT',                           # on the upper right corner
-        'site_administration_text': 'Site administration',  # under main_title_text
-        'authentication_and_authorization_text': 'AUTHENTICATION AND AUTHORIZATION',  # under site_administration_text
-        'groups_text': 'Groups',                            # under authentication_and_authorization_text
-        'users_text': 'Users',                              # under groups
-        'postings_text': 'POSTINGS',                        # under users_text
-        'blog_posts_text': 'Blog posts',                    # under postings_text
-        'add_button_text': "'Add'",                         # in the upper central part, 3 of them
-        'change_button_text': "'Change'",                   # in the upper central part, 3 of them
-        'recent_actions_text': 'Recent actions',            # in the right column in the middle
-        'my_actions_text': 'My actions',                    # on the right column in the middle
-    },
     'add_group_page': {
         'breadcrumbs_text': 'Home › Authentication and Authorization › Groups › Add group',
         'add_group_text': 'Add group',

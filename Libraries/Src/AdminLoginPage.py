@@ -2,7 +2,7 @@ from LibraryLoader import LibraryLoader
 from ExpectedTexts import expected
 from AdminLoginPageLocators import *
 from AdminLoginPageTexts import *
-from ExpectedLinks import links, admin_login_page_url
+from AdminLoginPageLinks import admin_login_page_url
 from Browser import ElementState, AssertionOperator
 
 class AdminLoginPage:

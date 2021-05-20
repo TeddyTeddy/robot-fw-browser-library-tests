@@ -1,11 +1,5 @@
 # -*- coding: utf-8 -*-
 expected = {
-    'admin_login_page': {
-        'title_text': 'Django administration',
-        'username_text': 'Username:',
-        'password_text': 'Password:',
-        'login_button_text': 'Log in',
-    },
     'admin_main_page': {
         'main_title_text': 'Django administration',         # on the upper left corner
         'dynamic_user_tab_text': 'WELCOME, %s. VIEW SITE / CHANGE PASSWORD / LOG OUT',

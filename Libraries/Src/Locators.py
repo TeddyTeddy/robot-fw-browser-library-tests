@@ -4,14 +4,6 @@ number_of_add_buttons = 3
 number_of_change_buttons = 3
 
 locator = {
-    'admin_login_page': {
-        'title': '//*[@id="site-name"]/a',
-        'username_title': '//*[@id="login-form"]/div[1]/label',
-        'username_field': '//*[@id="id_username"]',
-        'password_title': '//*[@id="login-form"]/div[2]/label',
-        'password_field': '//*[@id="id_password"]',
-        'login_button': '//*[@id="login-form"]/div[3]/input'
-    },
     'admin_main_page': {
         'main_title': '//*[@id="site-name"]/a',             # on the upper left corner
         'welcome_user_x': '//*[@id="user-tools"]',          # on the upper right corner, the navigation bar for the user

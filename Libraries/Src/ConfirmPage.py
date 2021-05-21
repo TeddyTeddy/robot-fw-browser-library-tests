@@ -1,12 +1,12 @@
 from LibraryLoader import LibraryLoader
-from ConfirmGroupsDeletionsPageTexts import texts
-from ConfirmGroupsDeletionsPageLinks import links, expected_confirmation_page_url
-from ConfirmGroupsDeletionsPageLocators import locators
+from ConfirmPageTexts import texts
+from ConfirmPageLinks import links, expected_confirmation_page_url
+from ConfirmPageLocators import locators
 from Browser import ElementState, AssertionOperator
 import re
 from robot.api import logger
 
-class ConfirmGroupsDeletionsPage:
+class ConfirmPage:
     """
     This Robot Library contains keywords operating on the XXX
     """
@@ -15,17 +15,17 @@ class ConfirmGroupsDeletionsPage:
     def __init__(self):
         self._loader = LibraryLoader.get_instance()  # singleton
 
-    def verify_confirm_group_deletions_page(self, group_name):
+    def verify_confirm_page(self, group_name):
 
         self._loader.bl.wait_for_elements_state(selector=locators['are_you_sure_headline'], state=ElementState.visible)
         # at this stage, the page is assumed to be loaded
         # verify that confirm_groups_deletions_page url is correct
         self._loader.bl.get_url(assertion_operator=AssertionOperator.equal, assertion_expected=expected_confirmation_page_url)
 
-        self._verify_texts_on_confirm_groups_deletions_page(group_name)
-        self._verify_links_on_confirm_groups_deletions_page(group_name)
+        self._verify_texts_on_confirm_page(group_name)
+        self._verify_links_on_confirm_page(group_name)
 
-    def _verify_texts_on_confirm_groups_deletions_page(self, group_name):
+    def _verify_texts_on_confirm_page(self, group_name):
 
         self._loader.bl.get_text(selector=locators['breadcrumbs'],
                 assertion_operator=AssertionOperator.equal, assertion_expected=texts['breadcrumbs_text'])
@@ -53,7 +53,7 @@ class ConfirmGroupsDeletionsPage:
                 assertion_operator=AssertionOperator.equal, assertion_expected=texts['cancel_deletion_button_text'])
 
 
-    def _verify_links_on_confirm_groups_deletions_page(self, group_name):
+    def _verify_links_on_confirm_page(self, group_name):
         self._loader.bl.get_attribute(selector=locators['home'], attribute='href',
                 assertion_operator=AssertionOperator.equal, assertion_expected=links['home'])
 

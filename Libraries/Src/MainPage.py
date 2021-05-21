@@ -1,45 +1,45 @@
 from LibraryLoader import LibraryLoader
-from AdminMainPageLayoutData import number_of_add_buttons, number_of_change_buttons
-from AdminMainPageLocators import locators
-from AdminMainPageTexts import texts
-from AdminMainPageLinks import links, expected_admin_main_page_url
+from MainPageLayoutData import number_of_add_buttons, number_of_change_buttons
+from MainPageLocators import locators
+from MainPageTexts import texts
+from MainPageLinks import links, expected_main_page_url
 from robot.api import logger
 from Browser import ElementState, AssertionOperator
 
 
-class AdminMainPage:
+class MainPage:
     """
-    This Robot Library contains keywords operating on the expected_admin_main_page_url
+    This Robot Library contains keywords operating on the expected_main_page_url
     """
     ROBOT_LIBRARY_SCOPE = 'TEST SUITE'
 
     def __init__(self):
         self._loader = LibraryLoader.get_instance()  # singleton
 
-    def go_to_admin_main_page(self):
-        self._loader.bl.go_to(url=expected_admin_main_page_url)
+    def go_to_main_page(self):
+        self._loader.bl.go_to(url=expected_main_page_url)
 
-    def verify_admin_main_page(self, username):
+    def verify_main_page(self, username):
         """
         If the login attempt is successful, user is redirected to admin main page. This test checks the success
         of the login attempt by waiting for 'logout' element in the admin main page.
         If the element is enabled, then the url of of the redirected page is checked against
-        expected_admin_main_page_url. Then the test verifies all the texts and the links on the admin main page
+        expected_main_page_url. Then the test verifies all the texts and the links on the admin main page
         :return: None
         """
-        # at this stage, we expect a redirection to expected_admin_main_page_url
+        # at this stage, we expect a redirection to expected_main_page_url
         # wait until the Logout Element is enabled on the page
         self._loader.bl.wait_for_elements_state(selector=locators['logout'], state=ElementState.visible)
-        # check the validity of the url on the admin_main_page page
-        self._loader.bl.get_url(assertion_operator=AssertionOperator.equal, assertion_expected=expected_admin_main_page_url)
+        # check the validity of the url on the main_page page
+        self._loader.bl.get_url(assertion_operator=AssertionOperator.equal, assertion_expected=expected_main_page_url)
 
-        # admin_main_page is loaded at this point
-        self._verify_texts_on_admin_main_page(username)
-        self._verify_links_on_admin_main_page()
+        # main_page is loaded at this point
+        self._verify_texts_on_main_page(username)
+        self._verify_links_on_main_page()
 
-    def _verify_links_on_admin_main_page(self):
+    def _verify_links_on_main_page(self):
         """
-        Verify all the links on admin_main_page on expected_admin_main_page_url
+        Verify all the links on main_page on expected_main_page_url
         :return: None
         """
         self._loader.bl.get_attribute(selector=locators['main_title'], attribute='href',
@@ -89,9 +89,9 @@ class AdminMainPage:
         self._loader.bl.get_attribute(selector=locators['change_blog_post'], attribute='href',
                 assertion_operator=AssertionOperator.equal, assertion_expected=links['change_blog_post'])
 
-    def _verify_texts_on_admin_main_page(self, username):
+    def _verify_texts_on_main_page(self, username):
         """
-        Verify all the texts on admin_main_page on expected_admin_main_page_url
+        Verify all the texts on main_page on expected_main_page_url
         :return: None
         """
         self._loader.bl.get_text(selector=locators['main_title'],
@@ -146,7 +146,7 @@ class AdminMainPage:
 
     def click_on_add_group_button(self):
         """
-        In admin_main_page, it clicks on add_group button, once redirected to the add_group_page
+        In main_page, it clicks on add_group button, once redirected to the add_group_page
         :return None
         """
         self._loader.bl.click(selector=locators['add_group'])

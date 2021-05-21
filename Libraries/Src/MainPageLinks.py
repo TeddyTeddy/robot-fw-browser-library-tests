@@ -1,6 +1,6 @@
 from BaseLink import base_link
 
-expected_admin_main_page_url = f'{base_link}admin/'
+expected_main_page_url = f'{base_link}admin/'
 
 links = {
 	'main_title': '/admin/',           			  # on the upper left corner

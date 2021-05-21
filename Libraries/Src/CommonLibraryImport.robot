@@ -1,7 +1,7 @@
 *** Settings ***
-Library             AdminLoginPage.py
-Library             AdminMainPage.py
+Library             LoginPage.py
+Library             MainPage.py
 Library             AddGroupPage.py
 Library             GroupsPage.py
-Library             ConfirmGroupsDeletionsPage.py
+Library             ConfirmPage.py
 Variables           CommonVariables.py

@@ -1,4 +1,4 @@
-from AdminMainPageTexts import texts
+from MainPageTexts import texts
 
 locators = {
 	'main_title': '//*[@id="site-name"]/a',             # on the upper left corner

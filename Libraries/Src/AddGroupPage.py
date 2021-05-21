@@ -1,8 +1,8 @@
 from LibraryLoader import LibraryLoader
-from ExpectedTexts import expected
-from ExpectedLinks import links, expected_add_group_page_url
-from ExpectedAttributeValues import eav
-from Locators import locator
+from AddGroupPageElementsAttributes import eav
+from AddGroupPageLocators import locators
+from AddGroupPageLinks import links, expected_add_group_page_url
+from AddGroupPageTexts import texts
 from robot.api import logger
 from Browser import ElementState, AssertionOperator, MouseButton
 from ControlOption import ControlOption
@@ -26,7 +26,7 @@ class AddGroupPage:
         :return: None
         """
         # wait until the Logout Element is enabled on the page
-        self._loader.bl.wait_for_elements_state(selector=locator['add_group_page']['title'], state=ElementState.visible)
+        self._loader.bl.wait_for_elements_state(selector=locators['title'], state=ElementState.visible)
 
         # check the validity of the url on the add group page
         self._loader.bl.get_url(assertion_operator=AssertionOperator.equal, assertion_expected=expected_add_group_page_url)
@@ -45,55 +45,55 @@ class AddGroupPage:
             save_button
         :return: None
         """
-        self._loader.bl.get_attribute(selector=locator['add_group_page']['save_and_add_another_button'], attribute='value',
-                assertion_operator=AssertionOperator.equal, assertion_expected=expected['add_group_page']['save_and_add_another_button_text'])
+        self._loader.bl.get_attribute(selector=locators['save_and_add_another_button'], attribute='value',
+                assertion_operator=AssertionOperator.equal, assertion_expected=texts['save_and_add_another_button_text'])
 
-        self._loader.bl.get_attribute(selector=locator['add_group_page']['save_and_continue_editing_button'], attribute='value',
-                assertion_operator=AssertionOperator.equal, assertion_expected=expected['add_group_page']['save_and_continue_editing_button_text'])
+        self._loader.bl.get_attribute(selector=locators['save_and_continue_editing_button'], attribute='value',
+                assertion_operator=AssertionOperator.equal, assertion_expected=texts['save_and_continue_editing_button_text'])
 
-        self._loader.bl.get_attribute(selector=locator['add_group_page']['save_button'], attribute='value',
-                assertion_operator=AssertionOperator.equal, assertion_expected=expected['add_group_page']['save_button_text'])
+        self._loader.bl.get_attribute(selector=locators['save_button'], attribute='value',
+                assertion_operator=AssertionOperator.equal, assertion_expected=texts['save_button_text'])
 
     def _verify_texts_on_add_group_page(self):
 
-        self._loader.bl.get_text(selector=locator['add_group_page']['breadcrumbs'],
-                assertion_operator=AssertionOperator.equal, assertion_expected=expected['add_group_page']['breadcrumbs_text'])
+        self._loader.bl.get_text(selector=locators['breadcrumbs'],
+                assertion_operator=AssertionOperator.equal, assertion_expected=texts['breadcrumbs_text'])
 
-        self._loader.bl.get_text(selector=locator['add_group_page']['add_group'],
-                assertion_operator=AssertionOperator.equal, assertion_expected=expected['add_group_page']['add_group_text'])
+        self._loader.bl.get_text(selector=locators['add_group'],
+                assertion_operator=AssertionOperator.equal, assertion_expected=texts['add_group_text'])
 
-        self._loader.bl.get_text(selector=locator['add_group_page']['name'],
-                assertion_operator=AssertionOperator.equal, assertion_expected=expected['add_group_page']['name_text'])
+        self._loader.bl.get_text(selector=locators['name'],
+                assertion_operator=AssertionOperator.equal, assertion_expected=texts['name_text'])
 
-        self._loader.bl.get_text(selector=locator['add_group_page']['permissions'],
-                assertion_operator=AssertionOperator.equal, assertion_expected=expected['add_group_page']['permissions_text'])
+        self._loader.bl.get_text(selector=locators['permissions'],
+                assertion_operator=AssertionOperator.equal, assertion_expected=texts['permissions_text'])
 
-        self._loader.bl.get_text(selector=locator['add_group_page']['available_permissions_title'],
-                assertion_operator=AssertionOperator.equal, assertion_expected=expected['add_group_page']['available_permissions_title_text'])
+        self._loader.bl.get_text(selector=locators['available_permissions_title'],
+                assertion_operator=AssertionOperator.equal, assertion_expected=texts['available_permissions_title_text'])
 
-        self._loader.bl.get_text(selector=locator['add_group_page']['available_permissions_dropdown'],
-                assertion_operator=AssertionOperator.equal, assertion_expected=expected['add_group_page']['available_permissions_dropdown_content'])
+        self._loader.bl.get_text(selector=locators['available_permissions_dropdown'],
+                assertion_operator=AssertionOperator.equal, assertion_expected=texts['available_permissions_dropdown_content'])
 
-        self._loader.bl.get_attribute(selector=locator['add_group_page']['available_permissions_tooltip'], attribute='title',
-                assertion_operator=AssertionOperator.equal, assertion_expected=expected['add_group_page']['available_permissions_tooltip_text'])
+        self._loader.bl.get_attribute(selector=locators['available_permissions_tooltip'], attribute='title',
+                assertion_operator=AssertionOperator.equal, assertion_expected=texts['available_permissions_tooltip_text'])
 
-        self._loader.bl.get_text(selector=locator['add_group_page']['choose_all_permissions'],
-                assertion_operator=AssertionOperator.equal, assertion_expected=expected['add_group_page']['choose_all_permissions_text'])
+        self._loader.bl.get_text(selector=locators['choose_all_permissions'],
+                assertion_operator=AssertionOperator.equal, assertion_expected=texts['choose_all_permissions_text'])
 
-        self._loader.bl.get_text(selector=locator['add_group_page']['help_to_select_multiple_permissions'],
-                assertion_operator=AssertionOperator.equal, assertion_expected=expected['add_group_page']['help_to_select_multiple_permissions_text'])
+        self._loader.bl.get_text(selector=locators['help_to_select_multiple_permissions'],
+                assertion_operator=AssertionOperator.equal, assertion_expected=texts['help_to_select_multiple_permissions_text'])
 
-        self._loader.bl.get_text(selector=locator['add_group_page']['chosen_permissions_title'],
-                assertion_operator=AssertionOperator.equal, assertion_expected=expected['add_group_page']['chosen_permissions_text'])
+        self._loader.bl.get_text(selector=locators['chosen_permissions_title'],
+                assertion_operator=AssertionOperator.equal, assertion_expected=texts['chosen_permissions_text'])
 
-        self._loader.bl.get_attribute(selector=locator['add_group_page']['chosen_permissions_tooltip'], attribute='title',
-                assertion_operator=AssertionOperator.equal, assertion_expected=expected['add_group_page']['chosen_permissions_tooltip_text'])
+        self._loader.bl.get_attribute(selector=locators['chosen_permissions_tooltip'], attribute='title',
+                assertion_operator=AssertionOperator.equal, assertion_expected=texts['chosen_permissions_tooltip_text'])
 
-        self._loader.bl.get_text(selector=locator['add_group_page']['chosen_permissions_dropdown'],
-                assertion_operator=AssertionOperator.equal, assertion_expected=expected['add_group_page']['chosen_permissions_dropdown_text'])
+        self._loader.bl.get_text(selector=locators['chosen_permissions_dropdown'],
+                assertion_operator=AssertionOperator.equal, assertion_expected=texts['chosen_permissions_dropdown_text'])
 
-        self._loader.bl.get_text(selector=locator['add_group_page']['remove_all_permissions_option'],
-                assertion_operator=AssertionOperator.equal, assertion_expected=expected['add_group_page']['remove_all_permissions_text'])
+        self._loader.bl.get_text(selector=locators['remove_all_permissions_option'],
+                assertion_operator=AssertionOperator.equal, assertion_expected=texts['remove_all_permissions_text'])
 
     def _verify_links_on_add_group_page(self):
         """
@@ -101,17 +101,17 @@ class AddGroupPage:
         :return: None
         """
 
-        self._loader.bl.get_attribute(selector=locator['add_group_page']['home_link'], attribute='href',
-                assertion_operator=AssertionOperator.equal, assertion_expected=links['add_group_page']['home_link'])
+        self._loader.bl.get_attribute(selector=locators['home_link'], attribute='href',
+                assertion_operator=AssertionOperator.equal, assertion_expected=links['home_link'])
 
-        self._loader.bl.get_attribute(selector=locator['add_group_page']['authentication_and_authorization_link'], attribute='href',
-                assertion_operator=AssertionOperator.equal, assertion_expected=links['add_group_page']['authentication_and_authorization_link'])
+        self._loader.bl.get_attribute(selector=locators['authentication_and_authorization_link'], attribute='href',
+                assertion_operator=AssertionOperator.equal, assertion_expected=links['authentication_and_authorization_link'])
 
-        self._loader.bl.get_attribute(selector=locator['add_group_page']['groups_link'], attribute='href',
-                assertion_operator=AssertionOperator.equal, assertion_expected=links['add_group_page']['groups_link'])
+        self._loader.bl.get_attribute(selector=locators['groups_link'], attribute='href',
+                assertion_operator=AssertionOperator.equal, assertion_expected=links['groups_link'])
 
-        self._loader.bl.get_attribute(selector=locator['add_group_page']['choose_all_permissions_option'], attribute='href',
-                assertion_operator=AssertionOperator.equal, assertion_expected=links['add_group_page']['choose_all_permissions_link'])
+        self._loader.bl.get_attribute(selector=locators['choose_all_permissions_option'], attribute='href',
+                assertion_operator=AssertionOperator.equal, assertion_expected=links['choose_all_permissions_link'])
 
         self._verify_remove_all_permission_link()
 
@@ -124,26 +124,25 @@ class AddGroupPage:
         :return: None
         """
         # wait until the Logout Element is visible on the page
-        self._loader.bl.get_element_state(selector=locator['add_group_page']['remove_all_permissions_option'], state=ElementState.visible)
+        self._loader.bl.get_element_state(selector=locators['remove_all_permissions_option'], state=ElementState.visible)
 
-        if self._loader.bl.get_text(selector=locator['add_group_page']['chosen_permissions_dropdown']):
-            self._loader.bl.get_attribute(selector=locator['add_group_page']['remove_all_permissions_option'], attribute='class',
-                assertion_operator=AssertionOperator.equal, assertion_expected=eav['add_group_page']['remove_all_permissions_active'])
+        if self._loader.bl.get_text(selector=locators['chosen_permissions_dropdown']):
+            self._loader.bl.get_attribute(selector=locators['remove_all_permissions_option'], attribute='class',
+                assertion_operator=AssertionOperator.equal, assertion_expected=eav['remove_all_permissions_active'])
         else:
-            self._loader.bl.get_attribute(selector=locator['add_group_page']['remove_all_permissions_option'], attribute='class',
-                assertion_operator=AssertionOperator.equal, assertion_expected=eav['add_group_page']['remove_all_permissions_inactive'])
+            self._loader.bl.get_attribute(selector=locators['remove_all_permissions_option'], attribute='class',
+                assertion_operator=AssertionOperator.equal, assertion_expected=eav['remove_all_permissions_inactive'])
 
     def enter_name_for_new_group(self, group_name):
-        self._loader.bl.fill_text(selector=locator['add_group_page']['input_name_field'], txt=group_name)
+        self._loader.bl.fill_text(selector=locators['input_name_field'], txt=group_name)
 
     def enter_search_term_in_available_permissions_filter(self, permission_search_term):
         # IMPORTANT: There are 2 options here, only comment out one option at a time and run the test suite
         # *********************** OPTION #1 start **********************************************************
-        self._loader.bl.type_text(selector=locator['add_group_page']['input_permission_field'],
-                                  txt=permission_search_term)
+        self._loader.bl.type_text(selector=locators['input_permission_field'], txt=permission_search_term)
         # *********************** OPTION #1 end ************************************************************
         # *********************** OPTION #2 start **********************************************************
-        # input_permission_field = self._loader.bl.get_element(selector=locator['add_group_page']['input_permission_field'])
+        # input_permission_field = self._loader.bl.get_element(selector=locators['input_permission_field)
         # logger.info(permission_search_term)
         # fill_text_js_function = ( 'function fill_permission_field() {\n'
         #        f'input_field = document.getElementById("id_permissions_input");\n'
@@ -158,11 +157,11 @@ class AddGroupPage:
         #      'fill_permission_field();\n'
         #)
 
-        # self._loader.bl.execute_javascript(function=fill_text_js_function, selector=input_permission_field)
+        # self._loader.bl.execute_javascript(function=fill_text_js_function, selector=locators['input_permission_field)
         # *********************** OPTION #2 end **********************************************************
 
         # return True if there are permissions listed, otherwise return False
-        return bool(self._loader.bl.get_text(selector=locator['add_group_page']['available_permissions_dropdown']))
+        return bool(self._loader.bl.get_text(selector=locators['available_permissions_dropdown']))
 
     def choose_all_filtered_permissions(self):
         """
@@ -174,8 +173,8 @@ class AddGroupPage:
         :return: None
         """
         # create a list of all the permissions listed inside available_permissions_dropdown
-        self._loader.bl.wait_for_elements_state(selector=locator['add_group_page']['generic_filtered_permission'], state=ElementState.visible)
-        filtered_permission_elements = self._loader.bl.get_elements(selector=locator['add_group_page']['generic_filtered_permission'])
+        self._loader.bl.wait_for_elements_state(selector=locators['generic_filtered_permission'], state=ElementState.visible)
+        filtered_permission_elements = self._loader.bl.get_elements(selector=locators['generic_filtered_permission'])
         filtered_permissions = []
         for element in filtered_permission_elements:
             permission = self._loader.bl.get_text(element)
@@ -191,7 +190,7 @@ class AddGroupPage:
             self._loader.bl.click( element, MouseButton.left, 1, None, None, None, False, False, control_option )
 
         # Then it clicks on choose_all_permissions_option
-        self._loader.bl.click( locator['add_group_page']['choose_all_permissions_option'], MouseButton.left)
+        self._loader.bl.click( locators['choose_all_permissions_option'], MouseButton.left)
         # It then verifies that the permissions are added inside chosen_permissions_dropdown.
         self._verify_permissions_added(filtered_permissions)
 
@@ -203,7 +202,7 @@ class AddGroupPage:
         chosen_permissions_dropdown as generic_chosen_permission
         :return:
         """
-        chosen_permission_elements = self._loader.bl.get_elements(selector=locator['add_group_page']['generic_chosen_permission'])
+        chosen_permission_elements = self._loader.bl.get_elements(selector=locators['generic_chosen_permission'])
         chosen_permissions = []
         for element in chosen_permission_elements:
             permission = self._loader.bl.get_text(element)
@@ -217,8 +216,8 @@ class AddGroupPage:
         assert chosen_permissions.issuperset(filtered_permissions)
 
     def clear_available_permissions_filter(self):
-        self._loader.bl.clear_text(selector=locator['add_group_page']['input_permission_field'])
+        self._loader.bl.clear_text(selector=locators['input_permission_field'])
 
     def click_on_save_button(self):
-        self._loader.bl.click(selector=locator['add_group_page']['save_button'])
+        self._loader.bl.click(selector=locators['save_button'])
 

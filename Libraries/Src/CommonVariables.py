@@ -1,12 +1,12 @@
-from ExpectedTexts import expected
+from AddGroupPageTexts import texts
 
-BLOG_EDITORS_PERMISSIONS = [expected['add_group_page']['postings-blog post-can_add_blog_post'],
-                            expected['add_group_page']['postings-blog post-can_change_blog_post'],
-                            expected['add_group_page']['postings-blog post-can_delete_blog_post']]
+BLOG_EDITORS_PERMISSIONS = [texts['postings_blog_post_can_add_blog_post'],
+                            texts['postings_blog_post_can_change_blog_post'],
+                            texts['postings_blog_post_can_delete_blog_post']]
 
-GROUP_EDITORS_PERMISSIONS = [expected['add_group_page']['auth-group-can_add_group'],
-                             expected['add_group_page']['auth-group-can_change_group'],
-                             expected['add_group_page']['auth-group-can_delete_group']]
+GROUP_EDITORS_PERMISSIONS = [texts['auth_group_can_add_group'],
+                             texts['auth_group_can_change_group'],
+                             texts['auth_group_can_delete_group']]
 
 
 def get_variables():

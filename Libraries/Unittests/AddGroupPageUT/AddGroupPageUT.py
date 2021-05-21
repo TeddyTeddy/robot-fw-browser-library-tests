@@ -174,7 +174,7 @@ class AddGroupPageUT(unittest.TestCase):
     def test_verify_add_group_page(self):
         # with permissions_drowdown_text is non empty string, "Remove all" button should be active
         AddGroupPageUT.do_test_verify_add_group_page(
-            chosen_permissions_dropdown_text=expected['add_group_page']['auth-group-can_add_group'])
+            chosen_permissions_dropdown_text=expected['add_group_page']['auth_group_can_add_group'])
         self.tearDown()
 
         self.setUp()
@@ -226,13 +226,13 @@ class AddGroupPageUT(unittest.TestCase):
     @staticmethod
     def get_filtered_permission_elements():
         element_one = mock()
-        element_one.text = expected['add_group_page']['auth-user-can_add_user']
+        element_one.text = expected['add_group_page']['auth_user_can_add_user']
 
         element_two = mock()
-        element_two.text = expected['add_group_page']['auth-user-can_change_user']
+        element_two.text = expected['add_group_page']['auth_user_can_change_user']
 
         element_three = mock()
-        element_three.text = expected['add_group_page']['auth-user-can_delete_user']
+        element_three.text = expected['add_group_page']['auth_user_can_delete_user']
 
         return [element_one, element_two, element_three]
 
@@ -303,9 +303,9 @@ class AddGroupPageUT(unittest.TestCase):
     @staticmethod
     def do_get_text_for_available_permissions_dropdown(permission_search_term):
         if permission_search_term == 'blog':
-            return expected['add_group_page']['postings-blog post-can_add_blog_post'] + '\n' + \
-                   expected['add_group_page']['postings-blog post-can_add_blog_post'] + '\n' + \
-                   expected['add_group_page']['postings-blog post-can_add_blog_post']
+            return expected['add_group_page']['postings_blog_post_can_add_blog_post'] + '\n' + \
+                   expected['add_group_page']['postings_blog_post_can_add_blog_post'] + '\n' + \
+                   expected['add_group_page']['postings_blog_post_can_add_blog_post']
         elif permission_search_term == 'yielding no permissions':
             return ''
         else:

@@ -1,5 +1,4 @@
 from LibraryLoader import LibraryLoader
-from ExpectedTexts import expected
 from AdminLoginPageLocators import locators
 from AdminLoginPageTexts import texts
 from AdminLoginPageLinks import admin_login_page_url

@@ -1,8 +1,8 @@
 from LibraryLoader import LibraryLoader
 from AdminMainPageLayoutData import number_of_add_buttons, number_of_change_buttons
-from AdminMainPageLocators import *
-from AdminMainPageTexts import *
-from AdminMainPageLinks import *
+from AdminMainPageLocators import locators
+from AdminMainPageTexts import texts
+from AdminMainPageLinks import links, expected_admin_main_page_url
 from robot.api import logger
 from Browser import ElementState, AssertionOperator
 
@@ -29,7 +29,7 @@ class AdminMainPage:
         """
         # at this stage, we expect a redirection to expected_admin_main_page_url
         # wait until the Logout Element is enabled on the page
-        self._loader.bl.wait_for_elements_state(selector=logout, state=ElementState.visible)
+        self._loader.bl.wait_for_elements_state(selector=locators['logout'], state=ElementState.visible)
         # check the validity of the url on the admin_main_page page
         self._loader.bl.get_url(assertion_operator=AssertionOperator.equal, assertion_expected=expected_admin_main_page_url)
 
@@ -42,111 +42,111 @@ class AdminMainPage:
         Verify all the links on admin_main_page on expected_admin_main_page_url
         :return: None
         """
-        self._loader.bl.get_attribute(selector=main_title, attribute='href',
-                assertion_operator=AssertionOperator.equal, assertion_expected=main_title_link)
+        self._loader.bl.get_attribute(selector=locators['main_title'], attribute='href',
+                assertion_operator=AssertionOperator.equal, assertion_expected=links['main_title'])
 
-        self._loader.bl.get_attribute(selector=view_site, attribute='href',
-                assertion_operator=AssertionOperator.equal, assertion_expected=view_site_link)
+        self._loader.bl.get_attribute(selector=locators['view_site'], attribute='href',
+                assertion_operator=AssertionOperator.equal, assertion_expected=links['view_site'])
 
-        self._loader.bl.get_attribute(selector=change_password, attribute='href',
-                assertion_operator=AssertionOperator.equal, assertion_expected=change_password_link)
+        self._loader.bl.get_attribute(selector=locators['change_password'], attribute='href',
+                assertion_operator=AssertionOperator.equal, assertion_expected=links['change_password'])
 
-        self._loader.bl.get_attribute(selector=logout, attribute='href',
-                assertion_operator=AssertionOperator.equal, assertion_expected=logout_link)
+        self._loader.bl.get_attribute(selector=locators['logout'], attribute='href',
+                assertion_operator=AssertionOperator.equal, assertion_expected=links['logout'])
 
         # authentication and authorization section
-        self._loader.bl.get_attribute(selector=authentication_and_authorization, attribute='href',
-                assertion_operator=AssertionOperator.equal, assertion_expected=authentication_and_authorization_link)
+        self._loader.bl.get_attribute(selector=locators['authentication_and_authorization'], attribute='href',
+                assertion_operator=AssertionOperator.equal, assertion_expected=links['authentication_and_authorization'])
 
-        self._loader.bl.get_attribute(selector=groups, attribute='href',
-                assertion_operator=AssertionOperator.equal, assertion_expected=groups_link)
+        self._loader.bl.get_attribute(selector=locators['groups'], attribute='href',
+                assertion_operator=AssertionOperator.equal, assertion_expected=links['groups'])
 
-        self._loader.bl.get_attribute(selector=users, attribute='href',
-                assertion_operator=AssertionOperator.equal, assertion_expected=users_link)
+        self._loader.bl.get_attribute(selector=locators['users'], attribute='href',
+                assertion_operator=AssertionOperator.equal, assertion_expected=links['users'])
 
-        self._loader.bl.get_attribute(selector=add_group, attribute='href',
-                assertion_operator=AssertionOperator.equal, assertion_expected=add_group_link)
+        self._loader.bl.get_attribute(selector=locators['add_group'], attribute='href',
+                assertion_operator=AssertionOperator.equal, assertion_expected=links['add_group'])
 
-        self._loader.bl.get_attribute(selector=change_group, attribute='href',
-                assertion_operator=AssertionOperator.equal, assertion_expected=change_group_link)
+        self._loader.bl.get_attribute(selector=locators['change_group'], attribute='href',
+                assertion_operator=AssertionOperator.equal, assertion_expected=links['change_group'])
 
-        self._loader.bl.get_attribute(selector=add_user, attribute='href',
-                assertion_operator=AssertionOperator.equal, assertion_expected=add_user_link)
+        self._loader.bl.get_attribute(selector=locators['add_user'], attribute='href',
+                assertion_operator=AssertionOperator.equal, assertion_expected=links['add_user'])
 
-        self._loader.bl.get_attribute(selector=change_user, attribute='href',
-                assertion_operator=AssertionOperator.equal, assertion_expected=change_user_link)
+        self._loader.bl.get_attribute(selector=locators['change_user'], attribute='href',
+                assertion_operator=AssertionOperator.equal, assertion_expected=links['change_user'])
 
         # postings section
-        self._loader.bl.get_attribute(selector=postings, attribute='href',
-                assertion_operator=AssertionOperator.equal, assertion_expected=postings_link)
+        self._loader.bl.get_attribute(selector=locators['postings'], attribute='href',
+                assertion_operator=AssertionOperator.equal, assertion_expected=links['postings'])
 
-        self._loader.bl.get_attribute(selector=blog_posts, attribute='href',
-                assertion_operator=AssertionOperator.equal, assertion_expected=blog_posts_link)
+        self._loader.bl.get_attribute(selector=locators['blog_posts'], attribute='href',
+                assertion_operator=AssertionOperator.equal, assertion_expected=links['blog_posts'])
 
-        self._loader.bl.get_attribute(selector=add_blog_post, attribute='href',
-                assertion_operator=AssertionOperator.equal, assertion_expected=add_blog_post_link)
+        self._loader.bl.get_attribute(selector=locators['add_blog_post'], attribute='href',
+                assertion_operator=AssertionOperator.equal, assertion_expected=links['add_blog_post'])
 
-        self._loader.bl.get_attribute(selector=change_blog_post, attribute='href',
-                assertion_operator=AssertionOperator.equal, assertion_expected=change_blog_post_link)
+        self._loader.bl.get_attribute(selector=locators['change_blog_post'], attribute='href',
+                assertion_operator=AssertionOperator.equal, assertion_expected=links['change_blog_post'])
 
     def _verify_texts_on_admin_main_page(self, username):
         """
         Verify all the texts on admin_main_page on expected_admin_main_page_url
         :return: None
         """
-        self._loader.bl.get_text(selector=main_title,
-                assertion_operator=AssertionOperator.equal, assertion_expected=main_title_text)
+        self._loader.bl.get_text(selector=locators['main_title'],
+                assertion_operator=AssertionOperator.equal, assertion_expected=texts['main_title'])
 
         # user navigation bar on the upper right of the page
-        expected_dynamic_user_tab_text = dynamic_user_tab_text % username.upper()
-        self._loader.bl.get_text(selector=welcome_user_x,
+        expected_dynamic_user_tab_text = texts['dynamic_user_tab'] % username.upper()
+        self._loader.bl.get_text(selector=locators['welcome_user_x'],
                 assertion_operator=AssertionOperator.equal, assertion_expected=expected_dynamic_user_tab_text)
 
-        self._loader.bl.get_text(selector=view_site,
-                assertion_operator=AssertionOperator.equal, assertion_expected=view_site_text)
+        self._loader.bl.get_text(selector=locators['view_site'],
+                assertion_operator=AssertionOperator.equal, assertion_expected=texts['view_site'])
 
-        self._loader.bl.get_text(selector=change_password,
-                assertion_operator=AssertionOperator.equal, assertion_expected=change_password_text)
+        self._loader.bl.get_text(selector=locators['change_password'],
+                assertion_operator=AssertionOperator.equal, assertion_expected=texts['change_password'])
 
-        self._loader.bl.get_text(selector=logout,
-                assertion_operator=AssertionOperator.equal, assertion_expected=logout_text)
+        self._loader.bl.get_text(selector=locators['logout'],
+                assertion_operator=AssertionOperator.equal, assertion_expected=texts['logout'])
 
-        self._loader.bl.get_text(selector=site_administration,
-                assertion_operator=AssertionOperator.equal, assertion_expected=site_administration_text)
+        self._loader.bl.get_text(selector=locators['site_administration'],
+                assertion_operator=AssertionOperator.equal, assertion_expected=texts['site_administration'])
 
-        self._loader.bl.get_text(selector=authentication_and_authorization,
-                assertion_operator=AssertionOperator.equal, assertion_expected=authentication_and_authorization_text)
+        self._loader.bl.get_text(selector=locators['authentication_and_authorization'],
+                assertion_operator=AssertionOperator.equal, assertion_expected=texts['authentication_and_authorization'])
 
-        self._loader.bl.get_text(selector=groups,
-                assertion_operator=AssertionOperator.equal, assertion_expected=groups_text)
+        self._loader.bl.get_text(selector=locators['groups'],
+                assertion_operator=AssertionOperator.equal, assertion_expected=texts['groups'])
 
-        self._loader.bl.get_text(selector=users,
-                assertion_operator=AssertionOperator.equal, assertion_expected=users_text)
+        self._loader.bl.get_text(selector=locators['users'],
+                assertion_operator=AssertionOperator.equal, assertion_expected=texts['users'])
 
-        self._loader.bl.get_text(selector=postings,
-                assertion_operator=AssertionOperator.equal, assertion_expected=postings_text)
+        self._loader.bl.get_text(selector=locators['postings'],
+                assertion_operator=AssertionOperator.equal, assertion_expected=texts['postings'])
 
-        self._loader.bl.get_text(selector=blog_posts,
-                assertion_operator=AssertionOperator.equal, assertion_expected=blog_posts_text)
+        self._loader.bl.get_text(selector=locators['blog_posts'],
+                assertion_operator=AssertionOperator.equal, assertion_expected=texts['blog_posts'])
 
         # the number of 'Add' buttons must be number_of_add_buttons
-        logger.info(f"looking for Add buttons with XPATH = {add_button}")
-        self._loader.bl.get_element_count(selector=add_button,
+        logger.info(f"looking for Add buttons with XPATH = {locators['add_button']}")
+        self._loader.bl.get_element_count(selector=locators['add_button'],
                 assertion_operator=AssertionOperator.equal, expected_value=number_of_add_buttons)
         # the number of 'Change' buttons must be number_of_change_buttons
-        logger.info(f"looking for Change buttons with XPATH = {change_button}")
-        self._loader.bl.get_element_count(selector=change_button,
+        logger.info(f"looking for Change buttons with XPATH = {locators['change_button']}")
+        self._loader.bl.get_element_count(selector=locators['change_button'],
                 assertion_operator=AssertionOperator.equal, expected_value=number_of_change_buttons)
 
-        self._loader.bl.get_text(selector=recent_actions,
-                assertion_operator=AssertionOperator.equal, assertion_expected=recent_actions_text)
+        self._loader.bl.get_text(selector=locators['recent_actions'],
+                assertion_operator=AssertionOperator.equal, assertion_expected=texts['recent_actions'])
 
-        self._loader.bl.get_text(selector=my_actions,
-                assertion_operator=AssertionOperator.equal, assertion_expected=my_actions_text)
+        self._loader.bl.get_text(selector=locators['my_actions'],
+                assertion_operator=AssertionOperator.equal, assertion_expected=texts['my_actions'])
 
     def click_on_add_group_button(self):
         """
         In admin_main_page, it clicks on add_group button, once redirected to the add_group_page
         :return None
         """
-        self._loader.bl.click(selector=add_group)
+        self._loader.bl.click(selector=locators['add_group'])

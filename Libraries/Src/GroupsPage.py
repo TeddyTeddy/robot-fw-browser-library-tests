@@ -17,7 +17,7 @@ class GroupsPage:
     def __init__(self):
         self._loader = LibraryLoader.get_instance()  # singleton
 
-    def verify_groups_page_loaded(self, group_name):
+    def verify_url(self):
 
         self._loader.bl.wait_for_elements_state(selector=locator['select_group_to_change'], state=ElementState.visible)
 
@@ -25,46 +25,45 @@ class GroupsPage:
         # verify that groups_page url is correct
         self._loader.bl.get_url(assertion_operator=AssertionOperator.equal, assertion_expected=expected_groups_page_url)
 
-        self._verify_texts_on_groups_page(group_name)
-        self._verify_links_on_groups_page(group_name)
-
-    def _verify_texts_on_groups_page(self, group_name):
-
+    def verify_breadcrumbs_text(self):
         self._loader.bl.get_text(selector=locator['breadcrumbs'],
                 assertion_operator=AssertionOperator.equal, assertion_expected=texts['breadcrumbs'])
 
+    def verify_home_text(self):
         self._loader.bl.get_text(selector=locator['home_link'],
                 assertion_operator=AssertionOperator.equal, assertion_expected=texts['home_link'])
 
+    def verify_authentication_and_authorization_text(self):
         self._loader.bl.get_text(selector=locator['authentication_and_authorization_link'],
                 assertion_operator=AssertionOperator.equal, assertion_expected=texts['authentication_and_authorization_link'])
 
-        self._verify_dynamic_text_group_x_added_successfully(group_name)
-
+    def verify_select_group_to_change_text(self):
         self._loader.bl.get_text(selector=locator['select_group_to_change'],
                 assertion_operator=AssertionOperator.equal, assertion_expected=texts['select_group_to_change'])
 
+    def verify_search_button_text(self):
         self._loader.bl.get_attribute(selector=locator['search_button'], attribute='value',
                 assertion_operator=AssertionOperator.equal, assertion_expected=eav['search_button_value'])
 
+    def verify_action_text(self):
         self._loader.bl.get_text(selector=locator['action'],
                 assertion_operator=AssertionOperator.equal, assertion_expected=texts['action'])
 
+    def verify_delete_selected_groups_option_text(self):
         self._loader.bl.get_text(selector=locator['delete_selected_groups_option'],
                 assertion_operator=AssertionOperator.equal, assertion_expected=texts['delete_selected_groups_option'])
 
-        self._verify_dynamic_text_x_of_y_selected()
-
+    def verify_select_all_groups_text(self):
         self._loader.bl.get_text(selector=locator['select_all_groups'],
                 assertion_operator=AssertionOperator.equal, assertion_expected=texts['select_all_groups'])
 
-    def _verify_dynamic_text_group_x_added_successfully(self, group_name):
+    def verify_dynamic_text_group_x_added_successfully(self, group_name):
         expected_text = texts['group_x_added_successfully'] % group_name
 
         self._loader.bl.get_text(selector=locator['group_x_added_successfully'],
                 assertion_operator=AssertionOperator.equal, assertion_expected=expected_text)
 
-    def _verify_dynamic_text_x_of_y_selected(self):
+    def verify_dynamic_text_x_of_y_selected(self):
         """x and y are dynamic numbers that are present in the following elements in groups_page:
                 x_of_y_selected
                 y_groups
@@ -79,20 +78,19 @@ class GroupsPage:
         logger.info(observed_x_of_y_selected)
         assert y in observed_x_of_y_selected
 
-    def _verify_links_on_groups_page(self, group_name):
-
+    def verify_home_link(self):
         self._loader.bl.get_attribute(selector=locator['home_link'], attribute='href',
                 assertion_operator=AssertionOperator.equal, assertion_expected=links['home'])
 
+    def verify_authentication_and_authorization_link(self):
         self._loader.bl.get_attribute(selector=locator['authentication_and_authorization_link'], attribute='href',
                 assertion_operator=AssertionOperator.equal, assertion_expected=links['authentication_and_authorization'])
 
+    def verify_add_group_link(self):
         self._loader.bl.get_attribute(selector=locator['add_group'], attribute='href',
                 assertion_operator=AssertionOperator.equal, assertion_expected=links['add_group'])
 
-        self._verify_dynamic_link_for_group_name(group_name)
-
-    def _verify_dynamic_link_for_group_name(self, group_name):
+    def verify_dynamic_link_for_group_name(self, group_name):
         """
         An group element with text group_name is added in groups_page. This method checks that
         the element (which is an anchor with a dynamic href), contains the correct link
@@ -130,3 +128,4 @@ class GroupsPage:
 
     def press_go(self):
         self._loader.bl.click(selector=locator['go_button'])
+

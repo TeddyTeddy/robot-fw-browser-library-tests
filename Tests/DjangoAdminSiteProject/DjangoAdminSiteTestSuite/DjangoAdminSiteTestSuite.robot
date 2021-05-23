@@ -6,17 +6,20 @@ Resource            Resources/DjangoAdminSiteTestSuite_resource.robot
 *** Test Cases ***
 Logging In As Admin
     Go to login page
+    Verify Login Page
     Login    ${CREDENTIALS}[valid_admin][username]     ${CREDENTIALS}[valid_admin][password]    # opens admin_main_page
     Verify main page      ${CREDENTIALS}[valid_admin][username]
 
 Creating "Blog Editors" Group
     Go To Main Page
+    Verify Main Page    ${CREDENTIALS}[valid_admin][username]
     Click On Add Group Button   # opens add_group_page
     Verify Add Group Page
     Add Group With Permissions  group_name=${BLOG_EDITORS_GROUP_NAME}     permissions=${BLOG_EDITORS_PERMISSIONS}     # opens groups_page
 
 Creating "Group Editors" Group
     Go To Main Page
+    Verify Main Page    ${CREDENTIALS}[valid_admin][username]
     Click On Add Group Button   # opens add_group_page
     Verify Add Group Page
     Add Group With Permissions  group_name=${GROUP_EDITORS_GROUP_NAME}     permissions=${GROUP_EDITORS_PERMISSIONS}     # opens groups_page

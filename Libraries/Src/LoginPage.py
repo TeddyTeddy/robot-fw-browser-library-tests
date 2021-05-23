@@ -23,15 +23,17 @@ class LoginPage:
         self._loader.bl.go_to(url=login_page_url)
 		# check if the login button is visible
         self._loader.bl.wait_for_elements_state(selector=locators['login_button'], state=ElementState.visible)
-        self._verif_text_on_login_page()
 
-    def _verif_text_on_login_page(self):
+    def verify_title_text(self):
         self._loader.bl.get_text(selector=locators['title'], assertion_operator=AssertionOperator.equal, assertion_expected=texts['title'])
 
+    def verify_username_text(self):
         self._loader.bl.get_text(selector=locators['username_title'], assertion_operator=AssertionOperator.equal, assertion_expected=texts['username'])
 
+    def verify_password_text(self):
         self._loader.bl.get_text(selector=locators['password_title'], assertion_operator=AssertionOperator.equal, assertion_expected=texts['password'])
 
+    def verify_login_button_text(self):
         self._loader.bl.get_attribute(selector=locators['login_button'], attribute='value',
             assertion_operator=AssertionOperator.equal, assertion_expected=texts['login_button'])
 

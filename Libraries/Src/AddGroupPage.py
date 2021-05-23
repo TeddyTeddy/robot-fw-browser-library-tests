@@ -17,105 +17,95 @@ class AddGroupPage:
     def __init__(self):
         self._loader = LibraryLoader.get_instance()  # singleton
 
-    def verify_add_group_page(self):
-        """
-        In admin_main_page, it clicks on add_group button, once redirected to the add_group_page.
-        Once redirection occurs, this method checks for element title to be visible on add_group_page.
-        Then it verifies that current url is expected_add_group_page_url
-        It then verifies the page's texts and the links for correctness
-        :return: None
-        """
+    def verify_url(self):
         # wait until the Logout Element is enabled on the page
         self._loader.bl.wait_for_elements_state(selector=locators['title'], state=ElementState.visible)
 
         # check the validity of the url on the add group page
         self._loader.bl.get_url(assertion_operator=AssertionOperator.equal, assertion_expected=expected_add_group_page_url)
 
-        # at this point, the add_group_page is loaded
-        self._verify_texts_on_add_group_page()
-        self._verify_links_on_add_group_page()
-        self._verify_the_buttons_on_add_group_page()
 
-
-    def _verify_the_buttons_on_add_group_page(self):
-        """
-        Verifies the correctness of the value attribute in the following buttons:
-            save_and_add_another_button
-            save_and_continue_editing_button
-            save_button
-        :return: None
-        """
+    def verify_save_and_add_another_button(self):
         self._loader.bl.get_attribute(selector=locators['save_and_add_another_button'], attribute='value',
                 assertion_operator=AssertionOperator.equal, assertion_expected=texts['save_and_add_another_button'])
 
+    def verify_save_and_continue_editing_button(self):
         self._loader.bl.get_attribute(selector=locators['save_and_continue_editing_button'], attribute='value',
                 assertion_operator=AssertionOperator.equal, assertion_expected=texts['save_and_continue_editing_button'])
 
+    def verify_save_button(self):
         self._loader.bl.get_attribute(selector=locators['save_button'], attribute='value',
                 assertion_operator=AssertionOperator.equal, assertion_expected=texts['save_button'])
 
-    def _verify_texts_on_add_group_page(self):
-
+    def verify_breadcrumbs_text(self):
         self._loader.bl.get_text(selector=locators['breadcrumbs'],
                 assertion_operator=AssertionOperator.equal, assertion_expected=texts['breadcrumbs'])
 
+    def verify_add_group_text(self):
         self._loader.bl.get_text(selector=locators['add_group'],
                 assertion_operator=AssertionOperator.equal, assertion_expected=texts['add_group'])
 
+    def verify_name_text(self):
         self._loader.bl.get_text(selector=locators['name'],
                 assertion_operator=AssertionOperator.equal, assertion_expected=texts['name'])
 
+    def verify_permissions_text(self):
         self._loader.bl.get_text(selector=locators['permissions'],
                 assertion_operator=AssertionOperator.equal, assertion_expected=texts['permissions'])
 
+    def verify_available_permissions_text(self):
         self._loader.bl.get_text(selector=locators['available_permissions_title'],
                 assertion_operator=AssertionOperator.equal, assertion_expected=texts['available_permissions_title'])
 
+    def verify_available_permissions_dropdown_text(self):
         self._loader.bl.get_text(selector=locators['available_permissions_dropdown'],
                 assertion_operator=AssertionOperator.equal, assertion_expected=texts['available_permissions_dropdown_content'])
 
+    def verify_available_permissions_tooltip_text(self):
         self._loader.bl.get_attribute(selector=locators['available_permissions_tooltip'], attribute='title',
                 assertion_operator=AssertionOperator.equal, assertion_expected=texts['available_permissions_tooltip'])
 
+    def verify_choose_all_permissions_text(self):
         self._loader.bl.get_text(selector=locators['choose_all_permissions'],
                 assertion_operator=AssertionOperator.equal, assertion_expected=texts['choose_all_permissions'])
 
+    def verify_help_to_select_multiple_permissions_text(self):
         self._loader.bl.get_text(selector=locators['help_to_select_multiple_permissions'],
                 assertion_operator=AssertionOperator.equal, assertion_expected=texts['help_to_select_multiple_permissions'])
 
+    def verify_chosen_permissions_title_text(self):
         self._loader.bl.get_text(selector=locators['chosen_permissions_title'],
                 assertion_operator=AssertionOperator.equal, assertion_expected=texts['chosen_permissions'])
 
+    def verify_chosen_permissions_tooltip_text(self):
         self._loader.bl.get_attribute(selector=locators['chosen_permissions_tooltip'], attribute='title',
                 assertion_operator=AssertionOperator.equal, assertion_expected=texts['chosen_permissions_tooltip'])
 
+    def verify_chosen_permissions_dropdown_text(self):
         self._loader.bl.get_text(selector=locators['chosen_permissions_dropdown'],
                 assertion_operator=AssertionOperator.equal, assertion_expected=texts['chosen_permissions_dropdown'])
 
+    def verify_remove_all_permissions_text(self):
         self._loader.bl.get_text(selector=locators['remove_all_permissions_option'],
                 assertion_operator=AssertionOperator.equal, assertion_expected=texts['remove_all_permissions'])
 
-    def _verify_links_on_add_group_page(self):
-        """
-        Verify all the links on add_groups_page on expected_add_group_page_url
-        :return: None
-        """
-
+    def verify_home_link(self):
         self._loader.bl.get_attribute(selector=locators['home_link'], attribute='href',
                 assertion_operator=AssertionOperator.equal, assertion_expected=links['home_link'])
 
+    def verify_authentication_and_authorization_link(self):
         self._loader.bl.get_attribute(selector=locators['authentication_and_authorization_link'], attribute='href',
                 assertion_operator=AssertionOperator.equal, assertion_expected=links['authentication_and_authorization_link'])
 
+    def verify_groups_link(self):
         self._loader.bl.get_attribute(selector=locators['groups_link'], attribute='href',
                 assertion_operator=AssertionOperator.equal, assertion_expected=links['groups_link'])
 
+    def verify_choose_all_permissions_link(self):
         self._loader.bl.get_attribute(selector=locators['choose_all_permissions_option'], attribute='href',
                 assertion_operator=AssertionOperator.equal, assertion_expected=links['choose_all_permissions_link'])
 
-        self._verify_remove_all_permission_link()
-
-    def _verify_remove_all_permission_link(self):
+    def verify_remove_all_permissions_link(self):
         """
         If there are no permissions added under chosen_permissions_dropdown element,
         then remove_all_permissions_option should not be active.
@@ -191,11 +181,10 @@ class AddGroupPage:
 
         # Then it clicks on choose_all_permissions_option
         self._loader.bl.click( locators['choose_all_permissions_option'], MouseButton.left)
-        # It then verifies that the permissions are added inside chosen_permissions_dropdown.
-        self._verify_permissions_added(filtered_permissions)
+        return filtered_permissions
 
 
-    def _verify_permissions_added(self, filtered_permissions):  # use set operations like set1.contains(set2)
+    def verify_permissions_added(self, filtered_permissions):  # use set operations like set1.contains(set2)
         """
         Verifies that filtered_permissions is found under chosen_permissions_dropdown. Fails with assert otherwise.
         :param filtered_permissions: a list of filtered & chosen permissions to be verified to be added inside

@@ -6,9 +6,12 @@ Add Group With Permissions
     [Arguments]     ${group_name}       ${permissions}
     Enter name for new group    group_name=${group_name}
     FOR  ${permision}  IN   @{permissions}
-        ${found_permissions} =  Enter search term in available permissions filter   permission_search_term=${permision}
-        ${filtered_permissions} =   Run Keyword If  ${found_permissions}    Choose all filtered permissions
-        Verify Permissions Added    ${filtered_permissions}
+        ${found_permissions} =    Enter search term in available permissions filter
+        ...    permission_search_term=${permision}
+        IF    ${found_permissions}
+            ${filtered_permissions} =    Choose all filtered permissions
+            Verify Permissions Added    ${filtered_permissions}
+        END
         Clear Available Permissions Filter
     END
     Click on save button      # opens groups_page
@@ -112,7 +115,9 @@ Verify Texts on Groups Page
     GroupsPage.Verify Action Text
     GroupsPage.Verify Delete Selected Groups Option Text
     GroupsPage.Verify Select All Groups Text
-    Run Keyword If      $group_name       GroupsPage.Verify Dynamic Text Group X Added Successfully   ${group_name}
+    IF    $group_name
+        GroupsPage.Verify Dynamic Text Group X Added Successfully    ${group_name}
+    END
     GroupsPage.Verify Dynamic Text X of Y Selected
 
 Verify Links on Groups Page
@@ -120,9 +125,12 @@ Verify Links on Groups Page
     GroupsPage.Verify Home Link
     GroupsPage.Verify Authentication And Authorization Link
     GroupsPage.Verify Add Group Link
-    Run Keyword If      $group_name       GroupsPage.Verify Dynamic Link For Group Name     ${group_name}
-    Run Keyword If      $group_name       GroupsPage.Verify Group Added       ${group_name}
-
+    IF    $group_name
+        GroupsPage.Verify Dynamic Link For Group Name    ${group_name}
+    END
+    IF    $group_name
+        GroupsPage.Verify Group Added    ${group_name}
+    END
 
 Verify Confirm Page
     [Arguments]     ${group_name}

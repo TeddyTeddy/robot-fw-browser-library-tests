@@ -41,5 +41,3 @@ Deleting "Blog Editors" Group
     [Template]      Deleting Group
     ${CREDENTIALS}[valid_admin][username]       ${CREDENTIALS}[valid_admin][password]    ${BLOG_EDITORS_GROUP_NAME}
     ${CREDENTIALS}[valid_admin][username]       ${CREDENTIALS}[valid_admin][password]    ${GROUP_EDITORS_GROUP_NAME}
-
-

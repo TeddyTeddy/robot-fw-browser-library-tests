@@ -156,3 +156,9 @@ class MainPage:
 
     def click_on_add_group_button(self):
         self._loader.bl.click(selector=locators['add_group'])
+
+    def logout(self):
+        self._loader.bl.click(selector=locators['logout'])
+
+    def click_on_groups(self):
+        self._loader.bl.click(selector=locators['groups'])

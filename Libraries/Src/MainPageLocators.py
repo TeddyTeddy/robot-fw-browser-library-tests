@@ -5,7 +5,9 @@ locators = {
 	'welcome_user_x': '//*[@id="user-tools"]',          # on the upper right corner the navigation bar for the user
 	'view_site': '//*[@id="user-tools"]/a[1]',          # on the upper right corner
 	'change_password': '//*[@id="user-tools"]/a[2]',    # on the upper right corner
-	'logout': '//*[@id="user-tools"]/a[3]',             # on the upper right corner
+	'logout': '//*[@id="user-tools"]/a[3]',    			# on the upper right corner
+	# TODO: if logout locator below is used, cannot find the element in MainPage.verify_url() method
+	# 'logout': f'//*[@id="user-tools"]/a[contains(.,"{texts["logout"]}")]',             # on the upper right corner
 	'site_administration': '//*[@id="content"]/h1',      # under main_title
 	# authentication and authorization section
 	'authentication_and_authorization': '//*[@id="content-main"]/div[1]/table/caption/a',  # under site_administration

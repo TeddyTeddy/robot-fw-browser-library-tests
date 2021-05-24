@@ -97,7 +97,7 @@ Verify Buttons on Add Group Page
     AddGroupPage.Verify Save Button
 
 Verify Groups Page
-    [Arguments]     ${group_name}
+    [Arguments]     ${group_name}=${EMPTY}
     GroupsPage.Verify Url
     Verify Texts on Groups Page     ${group_name}
     Verify Links on Groups Page     ${group_name}
@@ -112,7 +112,7 @@ Verify Texts on Groups Page
     GroupsPage.Verify Action Text
     GroupsPage.Verify Delete Selected Groups Option Text
     GroupsPage.Verify Select All Groups Text
-    GroupsPage.Verify Dynamic Text Group X Added Successfully   ${group_name}
+    Run Keyword If      $group_name       GroupsPage.Verify Dynamic Text Group X Added Successfully   ${group_name}
     GroupsPage.Verify Dynamic Text X of Y Selected
 
 Verify Links on Groups Page
@@ -120,8 +120,8 @@ Verify Links on Groups Page
     GroupsPage.Verify Home Link
     GroupsPage.Verify Authentication And Authorization Link
     GroupsPage.Verify Add Group Link
-    GroupsPage.Verify Dynamic Link For Group Name     ${group_name}
-    GroupsPage.Verify Group Added       ${group_name}
+    Run Keyword If      $group_name       GroupsPage.Verify Dynamic Link For Group Name     ${group_name}
+    Run Keyword If      $group_name       GroupsPage.Verify Group Added       ${group_name}
 
 
 Verify Confirm Page

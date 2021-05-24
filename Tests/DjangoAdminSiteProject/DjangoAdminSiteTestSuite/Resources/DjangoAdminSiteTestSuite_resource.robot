@@ -1,22 +1,23 @@
 *** Settings ***
-Documentation    Keywords available only to DjangoAdminSiteTestSuite.robot
+Documentation    Keywords available only To DjangoAdminSiteTestSuite.robot
+
 
 *** Keywords ***
 Add Group With Permissions
-    [Arguments]     ${group_name}       ${permissions}
-    Enter name for new group    group_name=${group_name}
-    FOR  ${permision}  IN   @{permissions}
-        ${found_permissions} =    Enter search term in available permissions filter
-        ...    permission_search_term=${permision}
-        IF    ${found_permissions}
-            ${filtered_permissions} =    Choose all filtered permissions
+    [Documentation]     Assumes we are in AddGroup Page
+    [Arguments]     ${group_name}       ${search_terms}
+    Enter Name For New Group            ${group_name}
+    FOR  ${search_term}  IN   @{search_terms}
+        ${filtered_permissions} =    Enter Search Term In Available Permissions Filter  ${search_term}
+        IF    ${filtered_permissions}
+            ${filtered_permissions} =    Choose All Filtered Permissions
             Verify Permissions Added    ${filtered_permissions}
         END
         Clear Available Permissions Filter
     END
-    Click on save button      # opens groups_page
+    Click On Save Button      # opens groups_page
     GroupsPage.Verify Url
-    GroupsPage.Verify group added     group_name=${group_name}
+    GroupsPage.Verify Group Added       ${group_name}
 
 Verify Login Page
     LoginPage.Verify Title Text
@@ -27,16 +28,16 @@ Verify Login Page
 Verify Main Page
     [Arguments]     ${username}
     MainPage.Verify Url
-    Verify Texts on Main Page   ${username}
-    Verify Links on Main Page
-    Verify Number of Buttons on Main Page
+    Verify Texts On Main Page   ${username}
+    Verify Links On Main Page
+    Verify Number Of Buttons On Main Page
 
-Verify Links on Main Page
+Verify Links On Main Page
     MainPage.Verify Main Title Link
     MainPage.Verify View Site Link
     MainPage.Verify Change Password Link
     MainPage.Verify Logout Link
-    MainPage.Verify Authentication and Authorization Section Link
+    MainPage.Verify Authentication And Authorization Section Link
     MainPage.Verify Groups Link
     MainPage.Verify Users Link
     MainPage.Verify Add Group Link
@@ -48,7 +49,7 @@ Verify Links on Main Page
     MainPage.Verify Add Blog Post Link
     MainPage.Verify Change Blog Post Link
 
-Verify Texts on Main Page
+Verify Texts On Main Page
     [Arguments]     ${username}
     MainPage.Verify Main Title Text
     MainPage.Verify Wellcome User X Text    ${username}
@@ -56,23 +57,23 @@ Verify Texts on Main Page
     MainPage.Verify Change Password Text
     MainPage.Verify Logout Text
     MainPage.Verify Site Administration Text
-    MainPage.Verify Authentication and Authorization Text
+    MainPage.Verify Authentication And Authorization Text
     MainPage.Verify Groups Text
     MainPage.Verify Users Text
     MainPage.Verify Postings Text
     MainPage.Verify Blog Posts Text
 
-Verify Number of Buttons on Main Page
-    MainPage.Verify Number of Add Buttons
-    MainPage.Verify Number of Change Buttons
+Verify Number Of Buttons On Main Page
+    MainPage.Verify Number Of Add Buttons
+    MainPage.Verify Number Of Change Buttons
 
 Verify Add Group Page
     AddGroupPage.Verify Url
-    Verify Texts on Add Group Page
-    Verify Links on Add Group Page
-    Verify Buttons on Add Group Page
+    Verify Texts On Add Group Page
+    Verify Links On Add Group Page
+    Verify Buttons On Add Group Page
 
-Verify Texts on Add Group Page
+Verify Texts On Add Group Page
     AddGroupPage.Verify Breadcrumbs Text
     AddGroupPage.Verify Add Group Text
     AddGroupPage.Verify Name Text
@@ -81,36 +82,36 @@ Verify Texts on Add Group Page
     AddGroupPage.Verify Available Permissions ToolTip Text
     AddGroupPage.Verify Available Permissions Dropdown Text
     AddGroupPage.Verify Choose All Permissions Text
-    AddGroupPage.Verify Help to Select Multiple Permissions Text
+    AddGroupPage.Verify Help To Select Multiple Permissions Text
     AddGroupPage.Verify Chosen Permissions Title Text
     AddGroupPage.Verify Chosen Permissions Tooltip Text
     AddGroupPage.Verify Chosen Permissions DropDown Text
     AddGroupPage.Verify Remove All Permissions Text
 
-Verify Links on Add Group Page
+Verify Links On Add Group Page
     AddGroupPage.Verify Home Link
     AddGroupPage.Verify Authentication And Authorization Link
     AddGroupPage.Verify Groups Link
     AddGroupPage.Verify Choose All Permissions Link
     AddGroupPage.Verify Remove All Permissions Link
 
-Verify Buttons on Add Group Page
+Verify Buttons On Add Group Page
     AddGroupPage.Verify Save And Add Another Button
-    AddGroupPage.Verify Save And Continue Editing_button
+    AddGroupPage.Verify Save And Continue Editing Button
     AddGroupPage.Verify Save Button
 
 Verify Groups Page
     [Arguments]     ${group_name}=${EMPTY}
     GroupsPage.Verify Url
-    Verify Texts on Groups Page     ${group_name}
-    Verify Links on Groups Page     ${group_name}
+    Verify Texts On Groups Page     ${group_name}
+    Verify Links On Groups Page     ${group_name}
 
-Verify Texts on Groups Page
+Verify Texts On Groups Page
     [Arguments]     ${group_name}
     GroupsPage.Verify Breadcrumbs Text
     GroupsPage.Verify Home Text
-    GroupsPage.Verify Authentication and Authorization Text
-    GroupsPage.Verify Select Group to Change Text
+    GroupsPage.Verify Authentication And Authorization Text
+    GroupsPage.Verify Select Group To Change Text
     GroupsPage.Verify Search Button Text
     GroupsPage.Verify Action Text
     GroupsPage.Verify Delete Selected Groups Option Text
@@ -118,9 +119,9 @@ Verify Texts on Groups Page
     IF    $group_name
         GroupsPage.Verify Dynamic Text Group X Added Successfully    ${group_name}
     END
-    GroupsPage.Verify Dynamic Text X of Y Selected
+    GroupsPage.Verify Dynamic Text X Of Y Selected
 
-Verify Links on Groups Page
+Verify Links On Groups Page
     [Arguments]     ${group_name}
     GroupsPage.Verify Home Link
     GroupsPage.Verify Authentication And Authorization Link
@@ -135,10 +136,10 @@ Verify Links on Groups Page
 Verify Confirm Page
     [Arguments]     ${group_name}
     ConfirmPage.Verify Url
-    Verify Texts on Confirm Page     ${group_name}
-    Verify Links on Confirm Page     ${group_name}
+    Verify Texts On Confirm Page     ${group_name}
+    Verify Links On Confirm Page     ${group_name}
 
-Verify Texts on Confirm Page
+Verify Texts On Confirm Page
     [Arguments]     ${group_name}
     ConfirmPage.Verify Breadcrumbs Text
     ConfirmPage.Verify Are You Sure Headline Text
@@ -149,7 +150,7 @@ Verify Texts on Confirm Page
     ConfirmPage.Verify Confirm Deletion Button Text
     ConfirmPage.Verify Cancel Deletion Button Text
 
-Verify Links on Confirm Page
+Verify Links On Confirm Page
     [Arguments]     ${group_name}
     ConfirmPage.Verify Home Link
     ConfirmPage.Verify Authentication And Authorization Link

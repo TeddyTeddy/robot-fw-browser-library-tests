@@ -18,7 +18,9 @@ class GroupsPage:
         self._loader = LibraryLoader.get_instance()  # singleton
 
     def verify_url(self):
-
+        """ Waits for "Select Group to Change" text to appear in the page. Then
+            Verifies that URL of the page matches to expected_groups_page_url
+        """
         self._loader.bl.wait_for_elements_state(selector=locator['select_group_to_change'], state=ElementState.visible)
 
         # groups_page is loaded at this point
@@ -127,5 +129,7 @@ class GroupsPage:
                 texts['delete_selected_groups_option'])
 
     def press_go(self):
+        """ Causes a switch from GroupsPage to ConfirmPage
+        """
         self._loader.bl.click(selector=locator['go_button'])
 

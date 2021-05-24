@@ -18,6 +18,9 @@ class AddGroupPage:
         self._loader = LibraryLoader.get_instance()  # singleton
 
     def verify_url(self):
+        """ Waits for the page's title to appear in the page. Then
+            Verifies that URL of the page matches to expected_add_group_page_url
+        """
         # wait until the Logout Element is enabled on the page
         self._loader.bl.wait_for_elements_state(selector=locators['title'], state=ElementState.visible)
 
@@ -127,30 +130,20 @@ class AddGroupPage:
         self._loader.bl.fill_text(selector=locators['input_name_field'], txt=group_name)
 
     def enter_search_term_in_available_permissions_filter(self, permission_search_term):
-        # IMPORTANT: There are 2 options here, only comment out one option at a time and run the test suite
-        # *********************** OPTION #1 start **********************************************************
+        """ We enter permission_search_term into the available permissions filter, which then shows
+            the available permissions matching the permission_search_term.
+            This keyword types the content of permission_search_term into the filter.
+            After filtering operation, if the filtering operation yields any permission(s), then
+            this keyword returns True, otherwise it returns false
+
+        Args:
+            permission_search_term (str): a search string to match the permissions against
+
+        Returns:
+            bool: True, if there are any permission(s) matching permission_search_term
+                  False, if there are not any permissions matching permission_search_term
+        """
         self._loader.bl.type_text(selector=locators['input_permission_field'], txt=permission_search_term)
-        # *********************** OPTION #1 end ************************************************************
-        # *********************** OPTION #2 start **********************************************************
-        # input_permission_field = self._loader.bl.get_element(selector=locators['input_permission_field)
-        # logger.info(permission_search_term)
-        # fill_text_js_function = ( 'function fill_permission_field() {\n'
-        #        f'input_field = document.getElementById("id_permissions_input");\n'
-        #        'input_field.focus();'
-        #        f'permission_search_term = "{permission_search_term}"\n'
-        #        'var i;\n'
-        #        'for (i = 0; i < permission_search_term.length; i++) {\n'
-        #         'input_field.dispatchEvent(new KeyboardEvent("keydown",  {"key":permission_search_term[i]}));\n'
-        #        'input_field.dispatchEvent(new KeyboardEvent("keypress", {"key":permission_search_term[i]}));\n'
-        #        'input_field.dispatchEvent(new KeyboardEvent("keyup", {"key":permission_search_term[i]}));\n'
-        #       '}}\n'
-        #      'fill_permission_field();\n'
-        #)
-
-        # self._loader.bl.execute_javascript(function=fill_text_js_function, selector=locators['input_permission_field)
-        # *********************** OPTION #2 end **********************************************************
-
-        # return True if there are permissions listed, otherwise return False
         return bool(self._loader.bl.get_text(selector=locators['available_permissions_dropdown']))
 
     def choose_all_filtered_permissions(self):
@@ -201,7 +194,7 @@ class AddGroupPage:
         logger.info(chosen_permissions)
         logger.info(filtered_permissions)
         # NOTE: sorted(chosen_permissions) == sorted(filtered_permissions) does not work.
-        # Why? because filtered_permissions is a larger set
+        # TODO: Why the below statement works, even though filtered_permissions is not a larger set then filtered_permissions
         assert chosen_permissions.issuperset(filtered_permissions)
 
     def clear_available_permissions_filter(self):

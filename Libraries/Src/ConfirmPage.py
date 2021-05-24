@@ -16,7 +16,9 @@ class ConfirmPage:
         self._loader = LibraryLoader.get_instance()  # singleton
 
     def verify_url(self):
-
+        """ Waits for "Are you sure?" headline to appear in the page. Then
+            Verifies that URL of the page matches to expected_confirmation_page_url
+        """
         self._loader.bl.wait_for_elements_state(selector=locators['are_you_sure_headline'], state=ElementState.visible)
         # at this stage, the page is assumed to be loaded
         # verify that confirm_groups_deletions_page url is correct
@@ -68,12 +70,17 @@ class ConfirmPage:
                 assertion_operator=AssertionOperator.equal, assertion_expected=links['groups'])
 
     def verify_group_x_link(self, group_name):
+        """ Let x be the placeholder for group name. This keyword verifies that a link with text group_name has
+            an href attribute which follows a pattern. The pattern should be /admin/auth/group/<number>/change/
+        Args:
+            group_name (str): name of the group which is to be deleted
+        """
         # the group to be deleted shows as an item under locators['objects']
         group_locator = locators['generic_group_element'] % group_name
-        group_link = self._loader.bl.get_attribute(selector=group_locator, attribute='href')
-        logger.info(group_link)
+        observed_group_link = self._loader.bl.get_attribute(selector=group_locator, attribute='href')
+        logger.info(observed_group_link)
         # group link e.g:   /admin/auth/group/168/change/
-        match = re.search(links['group_to_be_deleted'], group_link)
+        match = re.search(links['group_to_be_deleted'], observed_group_link)
         assert bool(match)
 
     def verify_cancel_deletion_button_link(self):
@@ -82,5 +89,7 @@ class ConfirmPage:
                 assertion_operator=AssertionOperator.equal, assertion_expected=links['cancel_deletion_button'])
 
     def press_confirm_button(self):
+        """ Causes a switch from ConfirmPage to GroupsPage
+        """
         self._loader.bl.click(selector=locators['confirm_deletion_button'])
 

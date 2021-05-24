@@ -1,0 +1,5 @@
+python -m robot.libdoc Libraries/Src/LoginPage.py Libraries/Src/Docs/LoginPage.html
+python -m robot.libdoc Libraries/Src/MainPage.py Libraries/Src/Docs/MainPage.html
+python -m robot.libdoc Libraries/Src/GroupsPage.py Libraries/Src/Docs/GroupsPage.html
+python -m robot.libdoc Libraries/Src/ConfirmPage.py Libraries/Src/Docs/ConfirmPage.html
+python -m robot.libdoc Libraries/Src/AddGroupPage.py Libraries/Src/Docs/AddGroupPage.html

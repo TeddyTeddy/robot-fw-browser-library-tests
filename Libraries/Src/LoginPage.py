@@ -16,8 +16,6 @@ class LoginPage:
     def go_to_login_page(self):
         """
         Goes to Admin Login Page specified by login_page_url. It waits until the page's login button is enabled.
-        Once the login button is loaded, it checks title, username, password, and
-        login_button for correctness.
         :return: None
         """
         self._loader.bl.go_to(url=login_page_url)
@@ -39,7 +37,7 @@ class LoginPage:
 
     def login(self, username, password):
         """
-        Logins as admin user via admin login page. If the login attempt is successful, user is redirected to
+        Logins with the given credentials to admin login page. If the login attempt is successful, user is redirected to
         admin main page.
         """
         self._loader.bl.fill_secret(selector=locators['username_field'], secret=username)

@@ -20,8 +20,9 @@ class MainPage:
         self._loader.bl.go_to(url=expected_main_page_url)
 
     def verify_url(self):
-        # at this stage, we expect a redirection to expected_main_page_url
-        # wait until the Logout Element is enabled on the page
+        """ Waits until the "Logout" Element appears enabled on the upper right side of the page
+            Checks the page URL is the same as expected_main_page_url
+        """
         self._loader.bl.wait_for_elements_state(selector=locators['logout'], state=ElementState.visible)
         # check the validity of the url on the main_page
         self._loader.bl.get_url(assertion_operator=AssertionOperator.equal, assertion_expected=expected_main_page_url)
@@ -93,6 +94,12 @@ class MainPage:
                 assertion_operator=AssertionOperator.equal, assertion_expected=texts['main_title'])
 
     def verify_wellcome_user_x_text(self, username):
+        """[X being the placeholder for username]
+        Given the username (e.g. "Hakan"), this keyword verifies that a wellcome string appears mentioning the username
+
+        Args:
+            username ([str]): name of the user registered to the system
+        """
         # user navigation bar on the upper right of the page
         expected_dynamic_user_tab_text = texts['dynamic_user_tab'] % username.upper()
         self._loader.bl.get_text(selector=locators['welcome_user_x'],
@@ -161,4 +168,6 @@ class MainPage:
         self._loader.bl.click(selector=locators['logout'])
 
     def click_on_groups(self):
+        """Causes a switch from MainPage to GroupsPage
+        """
         self._loader.bl.click(selector=locators['groups'])
